@@ -1,0 +1,11 @@
+- name: Install g++
+  apt: name=g++ state=present
+- name: Install SQLite
+  apt: name=libsqlite3-dev state=present
+- name: Install Python
+  apt: name={{ item }} state=present
+  with_items: [python-pip, python-dev]
+- name: Install MySQL dev
+  apt: name=libmysqlclient-dev state=present
+- name: Install Python MySQL
+  pip: name=mysql-python

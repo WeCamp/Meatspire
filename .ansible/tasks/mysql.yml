@@ -1,0 +1,12 @@
+- name: Install MySQL
+  apt: name=mysql-server state=present
+- name: Configure MySQL
+  lineinfile:
+    state=present
+    dest=/etc/mysql/my.cnf
+    regexp='^bind-address\s*=\s*'
+    line='bind-address = 0.0.0.0'
+  notify: restart mysql
+- name: Add MySQL user
+  mysql_user: name=vagrant host=% password=vagrant priv=*.*:ALL,GRANT
+  notify: restart mysql

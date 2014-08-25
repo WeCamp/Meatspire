@@ -1,0 +1,4 @@
+- name: Place n98-magerun installer
+  copy: src=n98-magerun-install.sh dest=~/n98-magerun-install.sh mode=0700
+- name: Install n98-magerun
+  command: ~/n98-magerun-install.sh creates=/usr/local/bin/n98-magerun

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mkdir -p /var/log/mailcatcher
+chown -R vagrant /var/log/mailcatcher
+su - vagrant -c 'mailcatcher --http-ip=0.0.0.0 &>>/var/log/mailcatcher/mailcatcher.log'

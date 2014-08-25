@@ -1,0 +1,26 @@
+- name: Install php5-fpm
+  apt: name=php5-fpm state=present
+- name: Configure php5-fpm
+  template: src=php.j2 dest=/etc/php5/fpm/php.ini
+  notify: restart php
+- name: Configure php5-fpm permissions
+  template: src=www.j2 dest=/etc/php5/fpm/pool.d/www.conf
+  notify: restart php
+- name: Install aditional php packages
+  apt: name={{ item }} state=present
+  with_items:
+    - php5-cli
+    - php5-xdebug
+    - php5-mcrypt
+    - php5-gd
+    - php5-curl
+    - php5-xsl
+    - php5-mysql
+    - php5-intl
+  notify: restart php
+- name: Enable php5-mcrypt
+  command: php5enmod mcrypt creates=/etc/php5/fpm/conf.d/20-mcrypt.ini
+  notify: restart php
+- name: Configure php5-xdebug
+  template: src=xdebug.j2 dest=/etc/php5/mods-available/xdebug.ini
+  notify: restart php

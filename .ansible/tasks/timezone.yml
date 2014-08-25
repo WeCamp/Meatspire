@@ -1,0 +1,7 @@
+- name: Configure timezone
+  lineinfile:
+    state=present
+    dest=/etc/timezone
+    regexp='.*'
+    line='Europe/Amsterdam'
+  notify: update tzdata

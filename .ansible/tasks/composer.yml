@@ -1,0 +1,4 @@
+- name: Place composer installer
+  copy: src=composer-install.sh dest=~/composer-install.sh mode=0700
+- name: Install composer
+  command: ~/composer-install.sh creates=/usr/local/bin/composer

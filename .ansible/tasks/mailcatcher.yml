@@ -1,0 +1,17 @@
+- name: Install Ruby
+  apt: name={{ item }} state=present
+  with_items: [ruby1.9.1, ruby1.9.1-dev]
+- name: Update PATH
+  lineinfile: >
+    dest=/etc/environment
+    state=present
+    backrefs=yes
+    regexp='PATH=(["]*)((?!.*?/var/lib/gems/1\.9\.1).*?)(["]*)$'
+    line="PATH=\1\2:/var/lib/gems/1.9.1\3"
+- name: Install Mailcatcher
+  gem: name=mailcatcher state=latest user_install=no
+  notify: start mailcatcher
+- name: Create Mailcatcher service
+  template: src=mailcatcher.j2 dest=/etc/init.d/mailcatcher mode=0755
+- name: Start Mailcatcher on boot
+  command: update-rc.d mailcatcher defaults creates=/etc/rc0.d/K20mailcatcher

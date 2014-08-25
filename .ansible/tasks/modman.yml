@@ -1,0 +1,4 @@
+- name: Place modman installer
+  copy: src=modman-install.sh dest=~/modman-install.sh mode=0700
+- name: Install n98-magerun
+  command: ~/modman-install.sh creates=/usr/local/bin/modman

@@ -8,14 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Group
  * @package Application\Entity
  * @ORM\Entity
- * @ORM\Table(name="group")
+ * @ORM\Table(name="`group`")
  */
 class Group
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="group_id", type="integer", nullable=false)
      * @var int
      */
     protected $id;
@@ -31,6 +31,24 @@ class Group
      * @var string
      */
     protected $description;
+
+    /**
+     * @ORM\Column(name="image", type="string", nullable=true)
+     * @var string
+     */
+    protected $image;
+
+    /**
+     * @ORM\Column(name="location", type="string", nullable=true)
+     * @var string
+     */
+    protected $location;
+
+    /**
+     * @ORM\OneToMany(targetEntity="GroupMember", mappedBy="group")
+     * @var GroupMember
+     */
+    protected $members;
 
     /**
      * @param string $description
@@ -113,36 +131,18 @@ class Group
     }
 
     /**
-     * @param \Application\Entity\User $organizer
+     * @param GroupMember $members
      */
-    public function setOrganizer($organizer)
+    public function setMembers($members)
     {
-        $this->organizer = $organizer;
+        $this->members = $members;
     }
 
     /**
-     * @return \Application\Entity\User
+     * @return GroupMember
      */
-    public function getOrganizer()
+    public function getMembers()
     {
-        return $this->organizer;
+        return $this->members;
     }
-
-    /**
-     * @ORM\Column(name="image", type="string", nullable=true)
-     * @var string
-     */
-    protected $image;
-
-    /**
-     * @ORM\Column(name="location", type="string", nullable=true)
-     * @var string
-     */
-    protected $location;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="User")
-     * @var User
-     */
-    protected $organizer;
 }

@@ -1,0 +1,11 @@
+{
+    "name": "meetspire",
+    "version": "1.0.0",
+    "dependencies": {
+        "grunt": "~0.4.2",
+        "grunt-contrib-less": "~0.9.0",
+        "grunt-contrib-watch": "~0.5.3",
+        "grunt-cli": "~0.1.11",
+        "grunt-lesslint": "~0.17.0"
+    }
+}

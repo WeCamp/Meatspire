@@ -141,7 +141,7 @@ class Group
     protected $location;
 
     /**
-     * @ManyToMany(targetEntity="Group", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="User")
      * @var User
      */
     protected $organizer;

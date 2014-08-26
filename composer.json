@@ -13,5 +13,8 @@
 	    "doctrine/Doctrine-ORM-Module": "dev-master",
 	    "doctrine/doctrine-module": "0.9.*@dev",
         "zf-commons/zfc-user-doctrine-orm": "dev-master"
+    },
+    "require-dev": {
+        "codeception/codeception": "2.*"
     }
 }

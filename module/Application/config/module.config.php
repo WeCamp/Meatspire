@@ -68,6 +68,28 @@ return array(
                     ),
                 ),
             ),
+            'group' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/group',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Group',
+                    ),
+                ),
+                'may_terminate' => false,
+                'child_routes' => array(
+                    'create' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/create',
+                            'defaults' => array(
+                                'action' => 'create',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -77,6 +99,9 @@ return array(
         ),
         'aliases' => array(
             'translator' => 'MvcTranslator',
+        ),
+        'factories' => array(
+            'Application\Form\Group' => 'Application\Form\GroupFormFactory',
         ),
     ),
     'translator' => array(
@@ -92,7 +117,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\User' => 'Application\Controller\UserController'
+            'Application\Controller\User' => 'Application\Controller\UserController',
+            'Application\Controller\Group' => 'Application\Controller\GroupController'
         ),
     ),
 	'doctrine' => array(

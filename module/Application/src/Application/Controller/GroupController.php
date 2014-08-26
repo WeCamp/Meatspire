@@ -38,7 +38,6 @@ class GroupController extends AbstractActionController
             }
         }
 
-
         return new ViewModel(['groupForm' => $groupForm]);
     }
 }

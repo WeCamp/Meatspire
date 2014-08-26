@@ -25,3 +25,11 @@ vendor/bin/doctrine-module orm:schema-tool:update --force
 The project uses less to compile stylesheets. There are two ways to compile the css code from less:
 * `grunt build` builds the css one time
 * `grunt watch` watches for filechanges in assets/less and builds the css on a filechange
+
+Tests
+------------
+Codeception is used for acceptance testing. To run Codeception, make sure you have installed the dev dependencies
+through composer and run:
+```sh
+./vendor/bin/codecept run
+```

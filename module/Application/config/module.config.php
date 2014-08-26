@@ -22,6 +22,31 @@ return array(
                     ),
                 ),
             ),
+            'event' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/events',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Events',
+                        'action'        => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'create' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/create',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Events',
+                                'action'        => 'create',
+                            ),
+                        ),
+                    )
+                )
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -86,7 +111,8 @@ return array(
         ),
         'factories' => array(
             'Application\Form\Group' => 'Application\Form\GroupFormFactory',
-        ),
+            'Application\Form\Event' => 'Application\Form\EventFormFactory'
+        )
     ),
     'translator' => array(
         'locale' => 'en_US',
@@ -101,23 +127,24 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Group' => 'Application\Controller\GroupController'
+            'Application\Controller\Group' => 'Application\Controller\GroupController',
+            'Application\Controller\Events' => 'Application\Controller\EventsController'
         ),
     ),
-	'doctrine' => array(
-		'driver' => array(
-			__NAMESPACE__ . '_driver' => array(
-				'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-				'cache' => 'array',
-				'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
-			),
-			'orm_default' => array(
-				'drivers' => array(
-					__NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-				)
-			)
-		)
-	),
+    'doctrine' => array(
+        'driver' => array(
+            __NAMESPACE__ . '_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                )
+            )
+        )
+    ),
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,

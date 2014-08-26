@@ -1,1 +1,12 @@
-<?php echo $this->form($this->groupForm);
+<h1>Create a group</h1>
+
+<?php echo $this->form()->openTag($groupForm);
+
+foreach ($groupForm->getElements() as $element) {
+    echo $this->formRow($element);
+}
+?>
+
+<input type="submit" value="Create" class="btn btn-primary" />
+
+<?php echo $this->form()->closeTag($groupForm); ?>

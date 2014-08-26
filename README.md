@@ -1,7 +1,14 @@
 Meetspire
 =========
 
-Based on ZF2.
+Based on PHP, ZF2, bootstrap.
+
+Requirements
+-------------
+This project was developed using:
+* Ansible 1.7.1
+* Vagrant 1.6.3
+* Node 0.10.24
 
 Installation
 ------------
@@ -9,6 +16,7 @@ To install this project please run:
 ```sh
 vagrant up
 php composer.phar install
+npm install
 grunt build
 grunt watch
 ```

@@ -14,6 +14,7 @@ $settings = array(
 	 */
 	//'zend_db_adapter' => 'Zend\Db\Adapter\Adapter',
 
+    'enable_default_entities' => false,
 	/**
 	 * User Model Entity Class
 	 *

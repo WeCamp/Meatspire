@@ -19,6 +19,12 @@ class User extends ZfcUser
     protected $bio;
 
     /**
+     * @ORM\OneToMany(targetEntity="GroupMember", mappedBy="user")
+     * @var GroupMember
+     */
+    protected $groups;
+
+    /**
      * Get Bio.
      *
      * @return string

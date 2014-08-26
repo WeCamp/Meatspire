@@ -19,6 +19,7 @@ php composer.phar install
 npm install
 grunt build
 grunt watch
+vendor/bin/doctrine-module orm:schema-tool:update --force
 ```
 
 The project uses less to compile stylesheets. There are two ways to compile the css code from less:

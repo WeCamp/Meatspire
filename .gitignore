@@ -6,3 +6,5 @@
 .vagrant
 .idea
 vendor/
+node_modules/
+public/css/meetspire.css

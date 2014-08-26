@@ -7,6 +7,10 @@
     regexp='^bind-address\s*=\s*'
     line='bind-address = 0.0.0.0'
   notify: restart mysql
+
 - name: Add MySQL user
   mysql_user: name=vagrant host=% password=vagrant priv=*.*:ALL,GRANT
   notify: restart mysql
+
+- name: Create mySQL
+  mysql_db: name=meetspire encoding=utf8 state=present

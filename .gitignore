@@ -8,3 +8,5 @@
 vendor/
 node_modules/
 public/css/meetspire.css
+composer.phar
+codecept.phar

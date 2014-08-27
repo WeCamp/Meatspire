@@ -68,28 +68,6 @@ return array(
                     ),
                 ),
             ),
-            'group' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/group',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller' => 'Group',
-                    ),
-                ),
-                'may_terminate' => false,
-                'child_routes' => array(
-                    'create' => array(
-                        'type' => 'Literal',
-                        'options' => array(
-                            'route' => '/create',
-                            'defaults' => array(
-                                'action' => 'create',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
         ),
     ),
     'service_manager' => array(

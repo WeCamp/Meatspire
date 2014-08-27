@@ -22,6 +22,11 @@ class GroupController extends AbstractActionController
 
     public function createAction()
     {
+        if (!$this->zfcUserAuthentication()->hasIdentity()) {
+            $this->flashMessenger()->addErrorMessage('You have to be logged in to create an account');
+            return $this->redirect()->toRoute('home');
+        }
+
         /** @var \Zend\Form\Form $groupEntity */
         $groupForm = $this->getServiceLocator()->get('Application\Form\Group');
         $groupEntity = new Group();

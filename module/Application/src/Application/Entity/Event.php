@@ -34,15 +34,15 @@ class Event
 
     /**
      * @var float
-     * @ORM\Column(type="float")
+     * @ORM\Column(name="latitude", type="decimal", precision=9, scale=6, nullable=true)
      */
-    protected $latitude = 0;
+    protected $latitude;
 
     /**
      * @var float
-     * @ORM\Column(type="float")
+     * @ORM\Column(name="longitude", type="decimal", precision=9, scale=6, nullable=true)
      */
-    protected $longitude = 0;
+    protected $longitude;
 
     /**
      * @var string

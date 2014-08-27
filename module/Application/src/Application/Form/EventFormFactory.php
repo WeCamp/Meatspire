@@ -3,6 +3,7 @@
 namespace Application\Form;
 
 use Zend\Form\Form;
+use Zend\InputFilter\InputFilter;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Hydrator\ClassMethods;
@@ -19,6 +20,7 @@ class EventFormFactory implements FactoryInterface
     {
         $form = new Form('create-event');
         $form->setAttribute('role', 'form');
+        $form->setAttribute('class', 'form-horizontal');
 
         $form->add([
             'name' => 'title',
@@ -71,7 +73,24 @@ class EventFormFactory implements FactoryInterface
         ]);
 
         $form->setHydrator(new ClassMethods());
+        $form->setInputFilter($this->getInputFilter());
 
         return $form;
+    }
+
+    protected function getInputFilter()
+    {
+        $inputFilter = new InputFilter();
+        $inputFilter->add([
+            'name' => 'title',
+            'required' => true,
+            'validators' => [
+                ['name' => 'not_empty']
+            ],
+            'filters' => [
+                ['name' => 'StringTrim']
+            ]
+        ]);
+        return $inputFilter;
     }
 }

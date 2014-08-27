@@ -2,11 +2,13 @@
 
 <?php echo $this->form()->openTag($eventForm);
 
-foreach ($eventForm->getElements() as $element) {
-    echo $this->formRow($element);
-}
-?>
+foreach ($eventForm->getElements() as $element): ?>
+    <?php echo $this->formRow($element); ?>
+<?php endforeach; ?>
 
-<input type="submit" value="hey" class="btn btn-primary" />
+<div class="form-group">
+    <label></label>
+    <input type="submit" value="Create" class="btn btn-primary form-control" />
+</div>
 
 <?php echo $this->form()->closeTag($eventForm); ?>

@@ -100,9 +100,10 @@ return array(
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller' => 'Group',
+                        'action'     => 'index',
                     ),
                 ),
-                'may_terminate' => false,
+                'may_terminate' => true,
                 'child_routes' => array(
                     'create' => array(
                         'type' => 'Literal',

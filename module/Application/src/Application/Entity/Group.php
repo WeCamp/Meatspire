@@ -33,12 +33,6 @@ class Group
     protected $description;
 
     /**
-     * @ORM\Column(name="image", type="string", nullable=true)
-     * @var string
-     */
-    protected $image;
-
-    /**
      * @ORM\Column(name="location", type="string", nullable=true)
      * @var string
      */
@@ -80,22 +74,6 @@ class Group
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param string $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
     }
 
     /**

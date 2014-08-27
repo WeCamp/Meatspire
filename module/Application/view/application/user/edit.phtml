@@ -1,0 +1,28 @@
+<h2>Edit your profile</h2>
+
+<?php
+    var_dump($this->profile);
+?>
+
+<form action="" method="post">
+    <fieldset>
+        <label>First Name</label>
+        <input type="text" name="firstname" />
+    </fieldset>
+
+    <fieldset>
+        <label>Surname</label>
+        <input type="text" name="surname" />
+    </fieldset>
+
+    <fieldset>
+        <label>Bio</label>
+        <textarea name="bio"></textarea>
+    </fieldset>
+
+    <fieldset>
+        <input type="submit" name="save" value="Save profile"/>
+    </fieldset>
+
+
+</form>

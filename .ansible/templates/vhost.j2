@@ -1,24 +1,28 @@
 server {
-    listen 80 default;
-    listen [::]:80 ipv6only=on;
+
+    root /vagrant/public;
+    index index.html index.htm index.php;
 
     server_name meetspire.192.168.33.10.xip.io;
 
-    root /vagrant/public;
-
-    index index.php index.html;
-
     location / {
-        try_files $uri $uri/ /index.php;
+        try_files $uri $uri/ /index.php$is_args$args;
     }
 
-    location ~ ^(.+\.php)(?:/.+)?$ {
-        expires off;
+    location ~ .*\.(php|phtml)?$ {
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param APPLICATION_ENV development;
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_split_path_info ^(.+\.php)(/.*)$;
-        include fastcgi_params;
+    }
+
+    location ~ .*\.(git|jpg|jpeg|png|bmp|swf|ico)?$ {
+        expires 30d;
+    }
+
+    location ~ .*\.(js|css)?$ {
+        expires 1h;
     }
 
     location ~ /\.ht {

@@ -94,7 +94,7 @@ return array(
                 ),
             ),
             'group' => array(
-                'type' => 'Literal',
+                'type' => 'Segment',
                 'options' => array(
                     'route' => '/group',
                     'defaults' => array(

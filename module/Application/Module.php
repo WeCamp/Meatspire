@@ -9,6 +9,7 @@
 
 namespace Application;
 
+use Application\Service\Group;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -78,10 +79,16 @@ class Module
         return [
             'factories' => [
                 'Application\Service\Event' => function ($sm) {
-                        $entityManager = $sm->get('Doctrine\ORM\EntityManager');
-                        return new \Application\Service\EventService($entityManager);
-                    },
-            ],
+                    $entityManager = $sm->get('Doctrine\ORM\EntityManager');
+                    return new \Application\Service\EventService($entityManager);
+                },
+                'Application\Service\Group' => function ($sm) {
+                    $entityManager   = $sm->get('Doctrine\ORM\EntityManager');
+                    $groupRepository = $entityManager
+                        ->getRepository('Application\Entity\Group');
+                    return new Group($groupRepository, $entityManager);
+                }
+            ]
         ];
     }
 }

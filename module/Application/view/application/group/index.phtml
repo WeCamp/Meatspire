@@ -1,1 +1,34 @@
-Group index page.
+<?php $this->headTitle()->prepend($this->translate('Find meetspire groups')); ?>
+<h1>View all meetspire groups</h1>
+<div class="row">
+    <div class="col-lg-9">
+        Group count: <?=count($groups)?>
+        <ul class="list-group">
+        <?php
+        /** @var $group \Application\Entity\Group */
+        foreach($groups as $group): ?>
+            <li class="list-group-item">
+                <h2><?=$this->escapeHtml($group->getName())?></h2>
+                <?php if ($group->getDescription()): ?>
+                    <p><?=$this->escapeHtml($group->getDescription())?></p>
+                <?php else: ?>
+                    <p>This meetspire group does not have a description yet</p>
+                <?php endif; ?>
+            </li>
+        <?php endforeach ?>
+        </ul>
+    </div>
+    <div class="col-lg-3">
+        <h3>Filter by</h3>
+        <strong>Location</strong>
+        <ul class="list-group">
+            <?php foreach ($locations as $location): ?>
+                <li class="list-group-item">
+                    <a href="<?=$this->url('group')?>?<?=http_build_query(['location' => $location['location']])?>">
+                        <?=$this->escapeHtml($location['location'])?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>

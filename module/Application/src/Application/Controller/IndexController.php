@@ -16,6 +16,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        var_dump($this->params()->fromQuery());
         return new ViewModel();
     }
 }

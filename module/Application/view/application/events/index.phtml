@@ -1,1 +1,15 @@
-Index action for events. A list of upcoming events should show up here.
+<h1>List of events</h1>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Date</th>
+    </tr>
+    <?php /* @var \Application\Entity\Event $event */ ?>
+    <?php foreach ($this->events as $event) : ?>
+    <tr>
+        <td><?php echo $event->getTitle() ?></td>
+        <td><?php echo $event->getDatetime()->format('l F jS, Y') ?></td>
+    </tr>
+    <?php endforeach ?>
+</table>

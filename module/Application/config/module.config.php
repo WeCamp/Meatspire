@@ -25,7 +25,7 @@ return array(
             'event' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/events',
+                    'route'    => '/event',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Events',

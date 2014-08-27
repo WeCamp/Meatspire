@@ -144,7 +144,8 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Group' => 'Application\Controller\GroupController',
-            'Application\Controller\Events' => 'Application\Controller\EventsController'
+            'Application\Controller\Events' => 'Application\Controller\EventsController',
+            'Application\Controller\User' => 'Application\Controller\UserController'
         ),
     ),
     'doctrine' => array(

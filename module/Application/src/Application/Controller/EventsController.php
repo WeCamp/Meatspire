@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Entity\Event;
+use Application\Service\EventService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -10,7 +11,12 @@ class EventsController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        /** @var EventService $eventService */
+        $eventService = $this->getServiceLocator()->get('Application\Service\Event');
+
+        $events = $eventService->getEvents();
+
+        return new ViewModel(['events' => $events]);
     }
 
     public function createAction()

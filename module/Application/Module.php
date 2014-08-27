@@ -72,4 +72,16 @@ class Module
             ),
         );
     }
+
+    public function getServiceConfig()
+    {
+        return [
+            'factories' => [
+                'Application\Service\Event' => function ($sm) {
+                        $entityManager = $sm->get('Doctrine\ORM\EntityManager');
+                        return new \Application\Service\EventService($entityManager);
+                    },
+            ],
+        ];
+    }
 }

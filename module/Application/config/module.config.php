@@ -47,6 +47,22 @@ return array(
                     )
                 )
             ),
+
+             'zfcuser' => array(
+                 'child_routes' => array(
+                     'edit' => array(
+                         'type' => 'Literal',
+                         'options' => array(
+                             'route'    => '/edit',
+                             'defaults' => array(
+                                 'controller' => 'Application\Controller\User',
+                                 'action'     => 'edit',
+                             ),
+                         ),
+                     ),
+                 ),
+             ),
+
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -109,10 +125,6 @@ return array(
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
-        'factories' => array(
-            'Application\Form\Group' => 'Application\Form\GroupFormFactory',
-            'Application\Form\Event' => 'Application\Form\EventFormFactory'
-        )
     ),
     'translator' => array(
         'locale' => 'en_US',
@@ -126,9 +138,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Group' => 'Application\Controller\GroupController',
-            'Application\Controller\Events' => 'Application\Controller\EventsController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController'
         ),
     ),
     'doctrine' => array(

@@ -19,6 +19,42 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+        $zfcServiceEvents = $e->getApplication()->getServiceManager()->get('zfcuser_user_service')->getEventManager();
+
+        $em = $eventManager->getSharedManager();
+        // To validate new field
+        $em->attach('ZfcUser\Form\Register','init', function($e) {
+                $filter = $e->getTarget();
+                $element = $filter->add(
+                    array(
+                        'name'       => 'bio',
+                        'required'   => false,
+                        'allowEmpty' => true,
+                        'filters'    => array(array('name' => 'StringTrim')),
+                        'type'       => 'Zend\Form\Element\Textarea',
+                        'attributes' => array(
+                            'cols' => 40,
+                            'rows' => 10
+                        ),
+                        'options'    => array(
+                            'label'  => 'Bio'
+                        )
+                    )
+                );
+
+            });
+
+        // Store the field
+        $zfcServiceEvents->attach('register', function($e) {
+                $form = $e->getParam('form');
+                $user = $e->getParam('user');
+
+                $user->setUsername( $form->get('username')->getValue() );
+                $user->setBio( $form->get('bio')->getValue() );
+            });
+
+
     }
 
     public function getConfig()

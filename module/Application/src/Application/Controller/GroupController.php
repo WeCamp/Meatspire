@@ -23,7 +23,7 @@ class GroupController extends AbstractActionController
     public function createAction()
     {
         if (!$this->zfcUserAuthentication()->hasIdentity()) {
-            $this->flashMessenger()->addErrorMessage('You have to be logged in to create an account');
+            $this->flashMessenger()->addErrorMessage('You have to be logged in to create a group');
             return $this->redirect()->toRoute('home');
         }
 

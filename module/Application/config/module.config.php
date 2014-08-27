@@ -125,6 +125,10 @@ return array(
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
+        'factories' => array(
+            'Application\Form\Group' => 'Application\Form\GroupFormFactory',
+            'Application\Form\Event' => 'Application\Form\EventFormFactory'
+        )
     ),
     'translator' => array(
         'locale' => 'en_US',
@@ -138,7 +142,9 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Group' => 'Application\Controller\GroupController',
+            'Application\Controller\Events' => 'Application\Controller\EventsController'
         ),
     ),
     'doctrine' => array(

@@ -44,7 +44,21 @@ return array(
                                 'action'        => 'create',
                             ),
                         ),
-                    )
+                    ),
+                    'view' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/view/:id[/:name]',
+                            'constraints' => array(
+                                'id' => '[0-9]+'
+                            ),
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Events',
+                                'action' => 'view',
+                            ),
+                        )
+                    ),
                 )
             ),
 

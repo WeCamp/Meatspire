@@ -44,4 +44,15 @@ class EventsController extends AbstractActionController
 
         return new ViewModel(['eventForm' => $eventForm]);
     }
+
+    public function viewAction()
+    {
+        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+
+        /** @var EventService $eventService */
+        $eventService = $this->getServiceLocator()->get('Application\Service\Event');
+        $event = $eventService->getEventById($id);
+
+        return new ViewModel(['event' => $event]);
+    }
 }

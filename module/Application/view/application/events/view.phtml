@@ -1,0 +1,12 @@
+<?php /** @var \Application\Entity\Event $event */ ?>
+
+<h1><?php echo $event->getTitle() ?></h1>
+
+<h3>Date & Time</h3>
+<p><?php echo $event->getDatetime()->format('l F jS, Y \a\t H:i A') ?></p>
+
+<h3>Location</h3>
+<p><?php echo $event->getLocation() ?></p>
+
+<h3>Description</h3>
+<p><?php echo nl2br($event->getDescription()) ?></p>

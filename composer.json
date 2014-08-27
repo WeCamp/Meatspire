@@ -12,7 +12,8 @@
         "zendframework/zendframework": "2.3.*",
         "doctrine/Doctrine-ORM-Module": "dev-master",
         "doctrine/doctrine-module": "0.9.*@dev",
-        "zf-commons/zfc-user-doctrine-orm": "dev-master"
+        "zf-commons/zfc-user-doctrine-orm": "dev-master",
+        "zendframework/zend-developer-tools": "dev-master"
     },
     "require-dev": {
         "codeception/codeception": "2.*"

@@ -1,0 +1,14 @@
+<h1>Create an event</h1>
+
+<?php echo $this->form()->openTag($eventForm);
+
+foreach ($eventForm->getElements() as $element): ?>
+    <?php echo $this->formRow($element); ?>
+<?php endforeach; ?>
+
+<div class="form-group">
+    <label></label>
+    <input type="submit" value="Create" class="btn btn-primary form-control" />
+</div>
+
+<?php echo $this->form()->closeTag($eventForm); ?>

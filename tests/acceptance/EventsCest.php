@@ -7,6 +7,6 @@ class EventsCest
         $I->am('guest');
         $I->wantTo('see that i can\'t create an event');
         $I->amOnPage('event/create');
-        $I->canSeeResponseCodeIs(301);
+        $I->canSee('have to be logged in', '.alert-danger');
     }
 }

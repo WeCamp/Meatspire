@@ -21,6 +21,11 @@ class EventsController extends AbstractActionController
 
     public function createAction()
     {
+        if (!$this->zfcUserAuthentication()->hasIdentity()) {
+            $this->flashMessenger()->addErrorMessage('You have to be logged in to create an event.');
+            return $this->redirect()->toRoute('home');
+        }
+
         /** @var \Zend\Form\Form $eventForm */
         $eventForm = $this->getServiceLocator()->get('Application\Form\Event');
         $eventEntity = new Event();

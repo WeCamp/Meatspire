@@ -12,20 +12,42 @@
 </div>
 <div class="row">
     <div class="col-lg-9">
-        <ul class="list-group">
         <?php
         /** @var $group \Application\Entity\Group */
         foreach($groups as $group): ?>
-            <li class="list-group-item">
-                <h2><?=$this->escapeHtml($group->getName())?></h2>
+        <div class="list-group">
+            <a href="<?php echo $this->url('group/view', ['id' => $group->getId()]) ?>" class="list-group-item">
+                <h4 class="list-group-item-heading"><?=$this->escapeHtml($group->getName())?></h4>
                 <?php if ($group->getDescription()): ?>
                     <p><?=$this->escapeHtml($group->getDescription())?></p>
                 <?php else: ?>
                     <p>This meetspire group does not have a description yet</p>
                 <?php endif; ?>
-            </li>
+                <?php if ($group->getMembers()->count() > 0): ?>
+                    <ul class="user-list">
+                        <?php /** @var \Application\Entity\GroupMember $groupMember */ ?>
+                        <?php foreach ($group->getMembers() as $groupMember): ?>
+                            <li>
+                                <img src="http://www.gravatar.com/avatar/<?=md5($groupMember->getUser()->getEmail())?>?s=32" />
+                            </li>
+                            <li>
+                                <img src="http://www.gravatar.com/avatar/<?=md5('rick93@gmail.com')?>?s=32" />
+                            </li>
+                            <li>
+                                <img src="http://www.gravatar.com/avatar/<?=md5('stefan@ingewikkeld.net')?>?s=32" />
+                            </li>
+                            <li>
+                                <img src="http://www.gravatar.com/avatar/<?=md5('jelrik@ingewikkeld.net')?>?s=32" />
+                            </li>
+                            <li>
+                                <img src="http://www.gravatar.com/avatar/<?=md5('mike@ingewikkeld.net')?>?s=32" />
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </a>
+        </div>
         <?php endforeach ?>
-        </ul>
     </div>
     <div class="col-lg-3">
         <div class="dropdown">

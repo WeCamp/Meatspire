@@ -135,6 +135,42 @@ return array(
                             ),
                         ),
                     ),
+                    'view' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/view/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]+',
+                            ),
+                            'defaults' => array(
+                                'action' => 'view',
+                            ),
+                        ),
+                    ),
+                    'join' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/join/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]+',
+                            ),
+                            'defaults' => array(
+                                'action' => 'join',
+                            ),
+                        ),
+                    ),
+                    'leave' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/leave/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]+',
+                            ),
+                            'defaults' => array(
+                                'action' => 'leave',
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),

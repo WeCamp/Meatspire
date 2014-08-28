@@ -1,0 +1,29 @@
+<?php
+/** @var \Application\Entity\Group $group */
+?>
+<div class="row">
+    <div class="col-lg-9">
+        <h1><?php echo $this->escapeHtml($group->getName()) ?></h1>
+
+        <h3>Location</h3>
+        <p><?php echo $group->getLocation() ?></p>
+
+        <h3>Description</h3>
+        <p><?php echo nl2br($this->escapeHtml($group->getDescription())) ?></p>
+    </div>
+    <div class="col-lg-3">
+        <h3>Members</h3>
+        <?php echo $this->render('application/group/partial/join-leave.phtml', ['group' => $group, 'isMember' => $this->isMember]) ?>
+        <br /><br />
+        <?php if ($group->getMembers()->count() > 0): ?>
+            <ul class="user-list">
+                <?php /** @var \Application\Entity\GroupMember $groupMember */ ?>
+                <?php foreach ($group->getMembers() as $groupMember) : ?>
+                <li>
+                    <img src="http://www.gravatar.com/avatar/<?=md5($groupMember->getUser()->getEmail())?>?s=32" />
+                </li>
+                <?php endforeach ?>
+            </ul>
+        <?php endif ?>
+    </div>
+</div>

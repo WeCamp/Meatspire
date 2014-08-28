@@ -40,4 +40,13 @@ class EventService
     {
         return $this->entityManager->getRepository('Application\Entity\Event')->find($id);
     }
+
+    /**
+     * @param Event $event
+     */
+    public function saveEvent(Event $event)
+    {
+        $this->entityManager->persist($event);
+        $this->entityManager->flush($event);
+    }
 }

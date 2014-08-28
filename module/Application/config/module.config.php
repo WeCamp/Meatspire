@@ -135,7 +135,9 @@ return array(
         ),
         'factories' => array(
             'Application\Form\Group' => 'Application\Form\GroupFormFactory',
-            'Application\Form\Event' => 'Application\Form\EventFormFactory'
+        ),
+        'invokables' => array(
+            'Application\Form\Event' => 'Application\Form\EventForm',
         )
     ),
     'translator' => array(

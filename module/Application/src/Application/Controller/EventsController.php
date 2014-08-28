@@ -62,7 +62,7 @@ class EventsController extends AbstractActionController
                     /** @var \Application\Service\GroupService $groupService */
                     $groupService = $this->getServiceLocator()->get('Application\Service\Group');
 
-                    $eventEntity->setGroup($groupService->getGroup($data['group_id']));
+                    $eventEntity->setGroup($groupService->getGroupById($data['group_id']));
                 }
 
                 $eventService->saveEvent($eventEntity);

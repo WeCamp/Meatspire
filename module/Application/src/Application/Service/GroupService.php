@@ -65,7 +65,7 @@ class GroupService
      * @param int $groupId
      * @return Group
      */
-    public function getGroup($groupId)
+    public function getGroupById($groupId)
     {
         return $this->groupRepository->find($groupId);
     }

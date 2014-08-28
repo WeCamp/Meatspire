@@ -31,7 +31,7 @@ class EventService
      */
     public function getEvents()
     {
-        return $this->entityManager->getRepository('Application\Entity\Event')->findAll();
+        return $this->entityManager->getRepository('Application\Entity\Event')->findBy([], ['datetime' => 'DESC']);
     }
 
     /**

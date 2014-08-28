@@ -41,7 +41,7 @@ class UserEdit extends Base {
 
     public function setCaptchaElement(Captcha $captchaElement)
     {
-        $this->captchaElement= $captchaElement;
+        $this->captchaElement = $captchaElement;
     }
 
     /**

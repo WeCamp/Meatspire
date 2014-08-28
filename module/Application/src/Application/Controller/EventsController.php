@@ -41,6 +41,7 @@ class EventsController extends AbstractActionController
         /** @var GroupMember[] $groupMemberships */
         $groupMemberships = $identity->getGroupMemberships()
             ->matching(Criteria::create()->where(Criteria::expr()->eq('role', GroupMember::ADMIN)));
+
         foreach ($groupMemberships as $groupMembership) {
             $groups[$groupMembership->getGroup()->getId()] = $groupMembership->getGroup()->getName();
         }
@@ -57,10 +58,12 @@ class EventsController extends AbstractActionController
                 /** @var \Application\Service\EventService $eventService */
                 $eventService = $this->getServiceLocator()->get('Application\Service\Event');
 
-                /** @var \Application\Service\GroupService $groupService */
-                $groupService = $this->getServiceLocator()->get('Application\Service\Group');
+                if (!empty($data['group_id'])) {
+                    /** @var \Application\Service\GroupService $groupService */
+                    $groupService = $this->getServiceLocator()->get('Application\Service\Group');
 
-                $eventEntity->setGroup($groupService->getGroup($data['group_id']));
+                    $eventEntity->setGroup($groupService->getGroup($data['group_id']));
+                }
 
                 $eventService->saveEvent($eventEntity);
 

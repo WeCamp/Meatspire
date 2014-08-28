@@ -1,9 +1,15 @@
 <?php $this->headTitle()->prepend($this->translate('Find meetspire groups')); ?>
-<?php if (isset($filters['location'])): ?>
-    <h1>Meetspire groups near <?=$this->escapeHtml($filters['location'])?></h1>
-<?php else: ?>
-    <h1>View all meetspire groups</h1>
-<?php endif; ?>
+<div class="row">
+    <?php if (isset($filters['location'])): ?>
+        <h1 class="col-lg-9">Meetspire groups near <?=$this->escapeHtml($filters['location'])?></h1>
+    <?php else: ?>
+        <h1 class="col-lg-9">View all meetspire groups</h1>
+    <?php endif; ?>
+
+    <div class="col-lg-3">
+        <a href="<?=$this->url('group/create')?>" class="btn btn-primary"><?=$this->translate('Create group')?></a>
+    </div>
+</div>
 <div class="row">
     <div class="col-lg-9">
         <ul class="list-group">
@@ -22,8 +28,6 @@
         </ul>
     </div>
     <div class="col-lg-3">
-        <h3>Filters</h3>
-
         <strong>Location</strong>
         <ul class="list-group">
             <li class="list-group-item">

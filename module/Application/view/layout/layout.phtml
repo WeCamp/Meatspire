@@ -41,10 +41,31 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="<?php echo $this->url('home') ?>" style="padding-left: 0"><i class="fa fa-home"></i><?php echo $this->translate('Home') ?></a></li>
-                        <li><a href="<?php echo $this->url('zfcuser/login') ?>"><i class="fa fa-sign-in"></i><?php echo $this->translate('Login') ?></a></li>
-                        <li><a href="<?php echo $this->url('group') ?>"><i class="fa fa-users"></i><?php echo $this->translate('Groups') ?></a></li>
-                        <li><a href="<?php echo $this->url('event') ?>"><i class="fa fa-map-marker"></i><?php echo $this->translate('Events') ?></a></li>
+                        <li><a href="<?php echo $this->url('home') ?>" style="padding-left: 0"><i class="fa fa-home"></i> <?php echo $this->translate('Home') ?></a></li>
+                        <li><a href="<?php echo $this->url('group') ?>"><i class="fa fa-users"></i> <?php echo $this->translate('Groups') ?></a></li>
+                        <li><a href="<?php echo $this->url('event') ?>"><i class="fa fa-map-marker"></i> <?php echo $this->translate('Events') ?></a></li>
+                    </ul>
+
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <?php if (!$this->zfcUserIdentity()): ?>
+                            <li>
+                                <a href="<?php echo $this->url('zfcuser/login') ?>"><i class="fa fa-sign-in"></i> <?php echo $this->translate('Login') ?></a>
+                            </li>
+                        <?php else: ?>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <?=$this->escapeHtml($this->zfcUserIdentity()->getDisplayName())?>
+                                    <img src="http://www.gravatar.com/avatar/<?=md5(strtolower($this->zfcUserIdentity()->getEmail()))?>?s=24" />
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="<?=$this->url('zfcuser/edit')?>">Edit profile</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="<?=$this->url('zfcuser/logout')?>">Logout</a></li>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

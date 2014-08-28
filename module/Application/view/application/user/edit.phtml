@@ -1,28 +1,14 @@
-<h2>Edit your profile</h2>
+<h1>Edit Profile</h1>
 
-<?php
-    var_dump($this->profile);
-?>
+<?php echo $this->form()->openTag($userEdit);
 
-<form action="" method="post">
-    <fieldset>
-        <label>First Name</label>
-        <input type="text" name="firstname" />
-    </fieldset>
+foreach ($userEdit->getElements() as $element): ?>
+    <?php echo $this->formRow($element); ?>
+<?php endforeach; ?>
 
-    <fieldset>
-        <label>Surname</label>
-        <input type="text" name="surname" />
-    </fieldset>
+<div class="form-group">
+    <label></label>
+    <input type="submit" value="Save" class="btn btn-primary form-control" />
+</div>
 
-    <fieldset>
-        <label>Bio</label>
-        <textarea name="bio"></textarea>
-    </fieldset>
-
-    <fieldset>
-        <input type="submit" name="save" value="Save profile"/>
-    </fieldset>
-
-
-</form>
+<?php echo $this->form()->closeTag($userEdit); ?>

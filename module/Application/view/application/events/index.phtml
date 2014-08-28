@@ -1,17 +1,19 @@
 <div class="row">
     <h1 class="col-lg-9">List of events</h1>
     <div class="col-lg-3">
-        <a href="<?=$this->url('event/create')?>" class="btn btn-primary"><?=$this->translate('Create event')?></a>
+        <a href="<?=$this->url('event/create')?>" class="btn btn-primary"><?=$this->translate('Create event')?></a><br /><br />
     </div>
 </div>
 
 <div class="row">
-    <ul class="col-lg-9 list-group">
+    <div class="col-lg-9">
         <?php /* @var \Application\Entity\Event $event */ ?>
         <?php foreach ($events as $event): ?>
-            <li class="list-group-item">
-                <h2>
+            <div class="list-group">
+                <a href="<?=$this->url('event/view', array('id' => $event->getId(), 'name' => $event->getTitle()))?>" class="list-group-item">
+                <h4 class="list-group-item-heading">
                     <?php echo $this->escapeHtml($event->getTitle()) ?>
+                    <small><?php echo ", ".$event->getDatetime()->format('F jS, Y \a\t H:i A') ?></small>
                     <?php
                     $user = $this->zfcUserIdentity();
                     if ($user) {
@@ -28,8 +30,12 @@
                         }
                     }
                     ?>
-                </h2>
-                <?php echo $event->getDatetime()->format('l F jS, Y') ?>
+                </h4>
+
+                <p class="list-group-item-text">
+                    <?php echo $this->translate('Organised by:') ?><br /><br />
+                    <?php echo $event->getDescription() ?>
+                </p>
                 <?php if ($event->getRsvps()): ?>
                     <ul class="rsvplist">
                     <?php foreach ($event->getRsvps() as $rsvp): ?>
@@ -51,7 +57,8 @@
                     <?php endforeach; ?>
                     </ul>
                 <?php endif; ?>
-            </li>
+                </a>
+            </div>
         <?php endforeach; ?>
-    </ul>
+    </div>
 </div>

@@ -12,13 +12,20 @@
 
         <?php
         echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                  ->prependStylesheet($this->basePath() . '/css/meetspire.css');
+                  ->appendStylesheet($this->basePath() . '/css/meetspire.css');
 
         echo $this->headScript()
-            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-            ->prependFile($this->basePath() . '/js/jquery.min.js')
-            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+            ->appendFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+            ->appendFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->appendFile($this->basePath() . '/js/jquery.min.js')
+            ->appendFile($this->basePath() . '/js/jquery-ui/core.min.js')
+            ->appendFile($this->basePath() . '/js/jquery-ui/widget.min.js')
+            ->appendFile($this->basePath() . '/js/jquery-ui/position.min.js')
+            ->appendFile($this->basePath() . '/js/jquery-ui/menu.min.js')
+            ->appendFile($this->basePath() . '/js/jquery-ui/autocomplete.min.js')
+            ->appendFile($this->basePath() . '/js/bootstrap.min.js')
+            ->appendFile($this->basePath() . '/js/bootstrap-tokenfield.js')
+            ->appendFile($this->basePath() . '/js/meetspire.js')
         ; ?>
 
     </head>
@@ -34,10 +41,10 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                        <li><a href="<?php echo $this->url('zfcuser/login') ?>"><?php echo $this->translate('Login') ?></a></li>
-                        <li><a href="<?php echo $this->url('group') ?>"><?php echo $this->translate('Groups') ?></a></li>
-                        <li><a href="<?php echo $this->url('event') ?>"><?php echo $this->translate('Events') ?></a></li>
+                        <li><a href="<?php echo $this->url('home') ?>" style="padding-left: 0"><i class="fa fa-home"></i><?php echo $this->translate('Home') ?></a></li>
+                        <li><a href="<?php echo $this->url('zfcuser/login') ?>"><i class="fa fa-sign-in"></i><?php echo $this->translate('Login') ?></a></li>
+                        <li><a href="<?php echo $this->url('group') ?>"><i class="fa fa-users"></i><?php echo $this->translate('Groups') ?></a></li>
+                        <li><a href="<?php echo $this->url('event') ?>"><i class="fa fa-map-marker"></i><?php echo $this->translate('Events') ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

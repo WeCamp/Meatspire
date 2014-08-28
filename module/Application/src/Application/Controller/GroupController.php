@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Entity\Group;
+use Application\Entity\GroupMember;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -33,7 +34,7 @@ class GroupController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
 
-        /** @var \Zend\Form\Form $groupEntity */
+        /** @var \Zend\Form\Form $groupForm */
         $groupForm = $this->getServiceLocator()->get('Application\Form\Group');
         $groupEntity = new Group();
         $groupForm->bind($groupEntity);
@@ -41,10 +42,15 @@ class GroupController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $groupForm->setData($this->getRequest()->getPost());
             if ($groupForm->isValid()) {
-                $entityManager = $this->getServiceLocator()
-                    ->get('Doctrine\ORM\EntityManager');
-                $entityManager->persist($groupEntity);
-                $entityManager->flush();
+                /** @var \Application\Service\EventService $eventService */
+                $eventService = $this->serviceLocator->get('Application\Service\Event');
+
+                $identity = $this->zfcUserAuthentication()->getIdentity();
+
+                $eventService->addUserToGroup($identity, $groupEntity, GroupMember::ADMIN);
+
+                $eventService->saveGroup($groupEntity);
+
                 return $this->redirect()->toRoute('group');
             }
         }

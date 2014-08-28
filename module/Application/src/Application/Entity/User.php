@@ -20,7 +20,7 @@ class User extends ZfcUser
     protected $bio;
 
     /**
-     * @ORM\OneToMany(targetEntity="GroupMember", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="GroupMember", mappedBy="user", cascade={"persist"})
      * @var ArrayCollection
      */
     protected $groupMemberships;

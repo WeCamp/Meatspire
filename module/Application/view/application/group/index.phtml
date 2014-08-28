@@ -28,28 +28,33 @@
         </ul>
     </div>
     <div class="col-lg-3">
-        <strong>Location</strong>
-        <ul class="list-group">
-            <li class="list-group-item">
-                <a href="<?=$this->url('group')?>">All locations</a>
-            </li>
-            <?php foreach ($locations as $location):
-                if (trim($location['location']) == '') {
-                    continue;
-                }
-                ?>
-                <li class="list-group-item">
-                    <a href="<?=$this->url('group')?>?<?=http_build_query(['location' => $location['location']])?>">
-                        <?php
-                        if (isset($filters['location']) && $filters['location'] == $location['location']) {
-                            printf('<strong>%s</strong>', $this->escapeHtml($location['location']));
-                        } else {
-                            echo $this->escapeHtml($location['location']);
-                        }
-                        ?>
-                    </a>
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                Location
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li class="presentation">
+                    <a role="menuitem" tabindex="-1" href="<?=$this->url('group')?>">All locations</a>
                 </li>
-            <?php endforeach; ?>
-        </ul>
+                <?php foreach ($locations as $location):
+                    if (trim($location['location']) == '') {
+                        continue;
+                    }
+                    ?>
+                    <li class="presentation">
+                        <a role="menuitem" tabindex="-1" href="<?=$this->url('group')?>?<?=http_build_query(['location' => $location['location']])?>">
+                            <?php
+                            if (isset($filters['location']) && $filters['location'] == $location['location']) {
+                                printf('<strong>%s</strong>', $this->escapeHtml($location['location']));
+                            } else {
+                                echo $this->escapeHtml($location['location']);
+                            }
+                            ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
     </div>
 </div>

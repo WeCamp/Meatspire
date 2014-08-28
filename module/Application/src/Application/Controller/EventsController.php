@@ -95,6 +95,7 @@ class EventsController extends AbstractActionController
     public function rsvpAction()
     {
         if (!$this->zfcUserAuthentication()->hasIdentity()) {
+            $this->flashMessenger()->addInfoMessage('You need to login before you can RSVP to an event');
             return $this->redirect()->toRoute('zfcuser/login');
         }
 

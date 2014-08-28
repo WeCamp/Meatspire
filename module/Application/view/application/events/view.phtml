@@ -19,7 +19,13 @@
         <h3>RSVP</h3>
         <?php if ($rsvp): ?>
             <p>
-                You're <?=$rsvp->getRsvpType() == $rsvp::TYPE_COMING ? '' : 'not '?>coming!
+                <?php
+                if ($rsvp->getRsvpType() == $rsvp::TYPE_COMING) {
+                    printf('<span class="label label-success">Going</span>');
+                } else {
+                    printf('<span class="label label-danger">Not going</span>');
+                }
+                ?>
                 <a href="#" data-todo="true">change RSVP</a>
             </p>
         <?php else: ?>

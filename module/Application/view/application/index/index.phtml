@@ -1,4 +1,10 @@
 <div class="row">
+    <div class="col-lg-12 homepage-header">
+        <p>Meet other people, learn things, be inspire</p>
+    </div>
+</div>
+
+<div class="row">
     <h1 class="col-lg-9">Current events</h1>
 </div>
 
@@ -8,7 +14,26 @@
 
             <div class="list-group">
                 <a href="<?=$this->url('event/view', array('id' => $event->getId(), 'name' => $event->getTitle()))?>" class="list-group-item">
-                    <h4 class="list-group-item-heading"><?php echo $this->escapeHtml($event->getTitle()) ?><small><?php echo ", ".$event->getDatetime()->format('F jS, Y \a\t H:i A') ?></small></h4>
+                    <h4 class="list-group-item-heading">
+                        <?php echo $this->escapeHtml($event->getTitle()) ?>
+                        <small><?php echo ", ".$event->getDatetime()->format('F jS, Y \a\t H:i A') ?></small>
+                        <?php
+                        $user = $this->zfcUserIdentity();
+                        if ($user) {
+                            /** @var $rsvp \Application\Entity\RSVP */
+                            foreach ($event->getRsvps() as $rsvp) {
+                                if ($rsvp->getUser()->getId() != $user->getId()) {
+                                    continue;
+                                }
+                                if ($rsvp->getRsvpType() == $rsvp::TYPE_COMING) {
+                                    printf('<span class="label label-success">Going</span>');
+                                } else {
+                                    printf('<span class="label label-danger">Not going</span>');
+                                }
+                            }
+                        }
+                        ?>
+                    </h4>
                     <p class="list-group-item-text">
                         <?php echo $this->translate('Organised by:') ?><br /><br />
                         <?php echo $event->getDescription() ?>

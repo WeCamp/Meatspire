@@ -2,6 +2,7 @@
 
 namespace Application\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +62,27 @@ class Event
      * @ORM\Column(type="datetimetz")
      */
     protected $datetime;
+
+    /**
+     * @var Group
+     * @ORM\ManyToOne(targetEntity="Group")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id")
+     */
+    protected $group;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="User")
+     * @ORM\JoinTable(name="event_organizer",
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="user_id")}
+     *      )
+     */
+    protected $organizers;
+
+    public function __construct()
+    {
+        $this->organizers = new ArrayCollection();
+    }
 
     /**
      * @param \DateTime $datetime
@@ -210,5 +232,35 @@ class Event
         return $this->title;
     }
 
+    /**
+     * @param Group $group
+     */
+    public function setGroup($group)
+    {
+        $this->group = $group;
+    }
 
+    /**
+     * @return Group
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param ArrayCollection $organizers
+     */
+    public function setOrganizers($organizers)
+    {
+        $this->organizers = $organizers;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getOrganizers()
+    {
+        return $this->organizers;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Application\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use ZfcUserDoctrineORM\Entity\User as ZfcUser;
 use \Doctrine\ORM\Mapping as ORM;
 
@@ -20,9 +21,14 @@ class User extends ZfcUser
 
     /**
      * @ORM\OneToMany(targetEntity="GroupMember", mappedBy="user")
-     * @var GroupMember
+     * @var ArrayCollection
      */
-    protected $groups;
+    protected $groupMemberships;
+
+    public function __construct()
+    {
+        $this->groupMemberships = new ArrayCollection();
+    }
 
     /**
      * Get Bio.
@@ -46,4 +52,19 @@ class User extends ZfcUser
         return $this;
     }
 
+    /**
+     * @param $groupMemberships
+     */
+    public function setGroupMemberships($groupMemberships)
+    {
+        $this->groupMemberships = $groupMemberships;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getGroupMemberships()
+    {
+        return $this->groupMemberships;
+    }
 }

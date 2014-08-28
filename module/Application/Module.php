@@ -43,7 +43,6 @@ class Module
                 $form = $e->getParam('form');
                 $user = $e->getParam('user');
 
-                $user->setUsername( $form->get('username')->getValue() );
                 $user->setBio( $form->get('bio')->getValue() );
             });
 

@@ -17,3 +17,4 @@ tests/acceptance/AcceptanceTester.php
 tests/functional/FunctionalTester.php
 tests/unit/UnitTester.php
 tests/_data/scenarios
+data/DoctrineORMModule

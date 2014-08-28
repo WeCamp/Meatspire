@@ -64,6 +64,12 @@ class Event
     protected $datetime;
 
     /**
+     * @ORM\OneToMany(targetEntity="RSVP", mappedBy="event")
+     * @var ArrayCollection
+     */
+    protected $rsvps;
+
+    /**
      * @var Group
      * @ORM\ManyToOne(targetEntity="Group")
      * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id")
@@ -81,6 +87,7 @@ class Event
 
     public function __construct()
     {
+        $this->rsvps = new ArrayCollection();
         $this->organizers = new ArrayCollection();
     }
 
@@ -230,6 +237,24 @@ class Event
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @param ArrayCollection $rsvps
+     * @return self
+     */
+    public function setRsvps($rsvps)
+    {
+        $this->rsvps = $rsvps;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRsvps()
+    {
+        return $this->rsvps;
     }
 
     /**

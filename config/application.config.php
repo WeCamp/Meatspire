@@ -8,7 +8,8 @@ return array(
         'ZfcBase',
         'ZfcUser',
         'ZfcUserDoctrineORM',
-        'TwbBundle'
+        'TwbBundle',
+        'ZendDeveloperTools'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

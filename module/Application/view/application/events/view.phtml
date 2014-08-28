@@ -1,12 +1,29 @@
-<?php /** @var \Application\Entity\Event $event */ ?>
+<?php
+/** @var \Application\Entity\Event $event */
+/** @var \Application\Entity\RSVP  $rsvp  */
+?>
+<div class="row">
+    <div class="col-lg-9">
+        <h1><?php echo $this->escapeHtml($event->getTitle()) ?></h1>
 
-<h1><?php echo $event->getTitle() ?></h1>
+        <h3>Date & Time</h3>
+        <p><?php echo $event->getDatetime()->format('l F jS, Y \a\t H:i A') ?></p>
 
-<h3>Date & Time</h3>
-<p><?php echo $event->getDatetime()->format('l F jS, Y \a\t H:i A') ?></p>
+        <h3>Description</h3>
+        <p><?php echo nl2br($this->escapeHtml($event->getDescription())) ?></p>
+    </div>
+    <div class="col-lg-3">
+        <h3>Location</h3>
+        <p><?php echo $this->escapeHtml($event->getLocation()) ?></p>
 
-<h3>Location</h3>
-<p><?php echo $event->getLocation() ?></p>
-
-<h3>Description</h3>
-<p><?php echo nl2br($event->getDescription()) ?></p>
+        <h3>RSVP</h3>
+        <?php if ($rsvp): ?>
+            <p>
+                You're <?=$rsvp->getRsvpType() == $rsvp::TYPE_COMING ? '' : 'not '?>coming!
+                <a href="#" data-todo="true">change RSVP</a>
+            </p>
+        <?php else: ?>
+            <?=$this->render('application/events/partial/rsvp.phtml')?>
+        <?php endif; ?>
+    </div>
+</div>

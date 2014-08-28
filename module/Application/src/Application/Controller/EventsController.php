@@ -54,7 +54,7 @@ class EventsController extends AbstractActionController
         $eventService = $this->getEventService();
         $event = $eventService->getEventById($id);
         $user = $this->zfcUserAuthentication()->getIdentity();
-        $rsvp = $eventService->getRsvpForUserAndEvent($user, $event);
+        $rsvp = $eventService->getRsvpForEventByUser($user, $event);
 
         return new ViewModel(['event' => $event, 'rsvp' => $rsvp]);
     }

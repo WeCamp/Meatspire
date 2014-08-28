@@ -65,7 +65,12 @@ class EventService
         }
     }
 
-    public function getRsvpForUserAndEvent(User $user, Event $event)
+    /**
+     * @param User $user
+     * @param Event $event
+     * @return null|object
+     */
+    public function getRsvpForEventByUser(User $user, Event $event)
     {
         $entityRepository = $this->entityManager->getRepository('Application\Entity\RSVP');
         $rsvp = $entityRepository->findOneBy(['event' => $event->getId(), 'user' => $user->getId()]);

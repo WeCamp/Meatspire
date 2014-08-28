@@ -2,7 +2,7 @@
 
 namespace Application;
 
-use Application\Service\Group;
+use Application\Service\GroupService;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -78,7 +78,7 @@ class Module
                     $entityManager   = $sm->get('Doctrine\ORM\EntityManager');
                     $groupRepository = $entityManager
                         ->getRepository('Application\Entity\Group');
-                    return new Group($groupRepository, $entityManager);
+                    return new GroupService($groupRepository, $entityManager);
                 }
             ]
         ];

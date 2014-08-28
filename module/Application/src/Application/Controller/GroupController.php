@@ -11,7 +11,7 @@ class GroupController extends AbstractActionController
 {
     public function indexAction()
     {
-        /** @var \Application\Service\Group $groups */
+        /** @var \Application\Service\GroupService $groups */
         $groups = $this->getServiceLocator()->get('Application\Service\Group');
 
         $filters = [];
@@ -42,7 +42,7 @@ class GroupController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $groupForm->setData($this->getRequest()->getPost());
             if ($groupForm->isValid()) {
-                /** @var \Application\Service\GroupService $eventService */
+                /** @var \Application\Service\GroupService $groupService */
                 $groupService = $this->serviceLocator->get('Application\Service\Group');
 
                 $identity = $this->zfcUserAuthentication()->getIdentity();

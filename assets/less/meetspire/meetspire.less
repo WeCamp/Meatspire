@@ -1,8 +1,21 @@
 @import '../bootstrap/bootstrap.less';
+@import '../jquery-ui/core';
+@import '../jquery-ui/theme';
+@import '../jquery-ui/autocomplete';
+@import '../bootstrap-tokenfield/bootstrap-tokenfield.less';
+@import '../bootstrap-tokenfield/tokenfield-typeahead.less';
 @import '../fontawesome/font-awesome.less';
 
 .navbar-nav {
   > li > a > i {
     padding-right: 7px;
   }
+}
+
+.ui-autocomplete {
+  list-style-type: none;
+  padding: 0;
+  padding-left: 12px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
 }

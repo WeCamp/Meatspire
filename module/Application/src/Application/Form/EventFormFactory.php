@@ -68,7 +68,7 @@ class EventFormFactory implements FactoryInterface
                 'label' => 'Date and time'
             ],
             'attributes' => [
-                'type' => 'number'
+                'type' => 'datetime'
             ]
         ]);
 

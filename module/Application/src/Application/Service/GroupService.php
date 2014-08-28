@@ -50,6 +50,24 @@ class GroupService
         $groupMember->setRole($role);
 
         $group->getMembers()->add($groupMember);
+
+        $this->entityManager->persist($group);
+        $this->entityManager->flush($group);
+    }
+
+    /**
+     * @param User $user
+     * @param Group $group
+     */
+    public function removeUserFromGroup(User $user, Group $group)
+    {
+        $memberships = $user->getGroupMemberships()->matching(
+            Criteria::create()->where(Criteria::expr()->eq('group', $group))
+        );
+        foreach ($memberships as $membership) {
+            $this->entityManager->remove($membership);
+            $this->entityManager->flush($membership);
+        }
     }
 
     /**

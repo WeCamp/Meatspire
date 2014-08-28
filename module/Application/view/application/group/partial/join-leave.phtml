@@ -1,0 +1,17 @@
+<?php if (!$this->isMember) : ?>
+    <a class="btn btn-success btn-lg" href="<?=$this->url(
+        'group/join',
+        array('id' => $group->getId())
+    )
+    ?>">
+        Join group
+    </a>
+<?php else : ?>
+    <a class="btn btn-danger btn-lg" href="<?=$this->url(
+        'group/leave',
+        array('id' => $group->getId())
+    )
+    ?>">
+        Leave group
+    </a>
+<?php endif ?>

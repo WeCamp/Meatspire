@@ -40,7 +40,7 @@ class Group
     protected $location;
 
     /**
-     * @ORM\OneToMany(targetEntity="GroupMember", mappedBy="group")
+     * @ORM\OneToMany(targetEntity="GroupMember", mappedBy="group", cascade={"persist"})
      * @var ArrayCollection
      */
     protected $members;

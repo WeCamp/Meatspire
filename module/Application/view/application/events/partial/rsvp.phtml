@@ -1,0 +1,23 @@
+<p>
+    Are you coming?
+</p>
+<div class="row">
+    <div class="col-lg-6">
+        <a class="btn btn-success btn-lg btn-rsvp" href="<?=$this->url(
+            'event/view/rsvp',
+            array('id' => $event->getId(), 'rsvp' => \Application\Entity\RSVP::TYPE_COMING)
+        )
+        ?>">
+            Yes
+        </a>
+    </div>
+    <div class="col-lg-6">
+        <a class="btn btn-danger btn-lg btn-rsvp" href="<?=$this->url(
+            'event/view/rsvp',
+            array('id' => $event->getId(), 'rsvp' => \Application\Entity\RSVP::TYPE_NOTCOMING)
+        )
+        ?>">
+            No
+        </a>
+    </div>
+</div>

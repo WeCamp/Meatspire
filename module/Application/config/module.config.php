@@ -41,7 +41,7 @@ return array(
                     'view' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/view/:id[/:name]',
+                            'route' => '/view/:id',
                             'constraints' => array(
                                 'id' => '[0-9]+'
                             ),
@@ -49,6 +49,20 @@ return array(
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller' => 'Events',
                                 'action' => 'view',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'rsvp' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/rsvp/:rsvp',
+                                    'defaults' => array(
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Events',
+                                        'action'        => 'rsvp',
+                                    ),
+                                ),
                             ),
                         )
                     ),

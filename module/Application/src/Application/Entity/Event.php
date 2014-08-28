@@ -2,6 +2,7 @@
 
 namespace Application\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +62,17 @@ class Event
      * @ORM\Column(type="datetimetz")
      */
     protected $datetime;
+
+    /**
+     * @ORM\OneToMany(targetEntity="RSVP", mappedBy="event")
+     * @var ArrayCollection
+     */
+    protected $rsvps;
+
+    public function __construct()
+    {
+        $this->rsvps = new ArrayCollection();
+    }
 
     /**
      * @param \DateTime $datetime
@@ -210,5 +222,21 @@ class Event
         return $this->title;
     }
 
+    /**
+     * @param ArrayCollection $rsvps
+     * @return self
+     */
+    public function setRsvps($rsvps)
+    {
+        $this->rsvps = $rsvps;
+        return $this;
+    }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getRsvps()
+    {
+        return $this->rsvps;
+    }
 }

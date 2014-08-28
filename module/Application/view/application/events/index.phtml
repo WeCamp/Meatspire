@@ -8,11 +8,50 @@
 <div class="row">
     <ul class="col-lg-9 list-group">
         <?php /* @var \Application\Entity\Event $event */ ?>
-        <?php foreach ($events as $event) : ?>
+        <?php foreach ($events as $event): ?>
             <li class="list-group-item">
-                <h2><?php echo $this->escapeHtml($event->getTitle()) ?></h2>
+                <h2>
+                    <?php echo $this->escapeHtml($event->getTitle()) ?>
+                    <?php
+                    $user = $this->zfcUserIdentity();
+                    if ($user) {
+                        /** @var $rsvp \Application\Entity\RSVP */
+                        foreach ($event->getRsvps() as $rsvp) {
+                            if ($rsvp->getUser()->getId() != $user->getId()) {
+                                continue;
+                            }
+                            if ($rsvp->getRsvpType() == $rsvp::TYPE_COMING) {
+                                printf('<span class="label label-success">Going</span>');
+                            } else {
+                                printf('<span class="label label-danger">Not going</span>');
+                            }
+                        }
+                    }
+                    ?>
+                </h2>
                 <?php echo $event->getDatetime()->format('l F jS, Y') ?>
+                <?php if ($event->getRsvps()): ?>
+                    <ul class="rsvplist">
+                    <?php foreach ($event->getRsvps() as $rsvp): ?>
+                        <li>
+                            <img src="http://www.gravatar.com/avatar/<?=md5($rsvp->getUser()->getEmail())?>?s=32" />
+                        </li>
+                        <li>
+                            <img src="http://www.gravatar.com/avatar/<?=md5('rick93@gmail.com')?>?s=32" />
+                        </li>
+                        <li>
+                            <img src="http://www.gravatar.com/avatar/<?=md5('stefan@ingewikkeld.net')?>?s=32" />
+                        </li>
+                        <li>
+                            <img src="http://www.gravatar.com/avatar/<?=md5('jelrik@ingewikkeld.net')?>?s=32" />
+                        </li>
+                        <li>
+                            <img src="http://www.gravatar.com/avatar/<?=md5('mike@ingewikkeld.net')?>?s=32" />
+                        </li>
+                    <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
             </li>
-        <?php endforeach ?>
+        <?php endforeach; ?>
     </ul>
 </div>

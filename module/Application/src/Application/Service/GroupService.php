@@ -2,12 +2,13 @@
 
 namespace Application\Service;
 
+use Application\Entity\Group;
 use Application\Entity\GroupMember;
 use Application\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
-class Group
+class GroupService
 {
     protected $groupRepository;
     protected $entityManager;
@@ -37,10 +38,10 @@ class Group
 
     /**
      * @param User $user
-     * @param \Application\Entity\Group $group
+     * @param Group $group
      * @param int $role
      */
-    public function addUserToGroup(User $user, \Application\Entity\Group $group, $role)
+    public function addUserToGroup(User $user, Group $group, $role)
     {
         $groupMember = new GroupMember();
         $groupMember->setUser($user);
@@ -51,9 +52,9 @@ class Group
     }
 
     /**
-     * @param \Application\Entity\Group $group
+     * @param Group $group
      */
-    public function saveGroup(\Application\Entity\Group $group)
+    public function saveGroup(Group $group)
     {
         $this->entityManager->persist($group);
         $this->entityManager->flush($group);

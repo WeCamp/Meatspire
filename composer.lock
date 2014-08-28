@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a7853e04638e260ede53072dfdbe9423",
+    "hash": "8f639fd82011888b306f08585eb82af8",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2565,6 +2565,7 @@
         "zendframework/zend-developer-tools": 20,
         "neilime/zf2-twb-bundle": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
     },

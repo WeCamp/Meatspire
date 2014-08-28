@@ -4,25 +4,19 @@ namespace Application\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Hydrator\ClassMethods;
 
-class EventFormFactory implements FactoryInterface
+class EventForm extends Form
 {
-    /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __construct()
     {
-        $form = new Form('create-event');
-        $form->setAttribute('role', 'form');
-        $form->setAttribute('class', 'form-horizontal');
+        parent::__construct('event');
 
-        $form->add([
+        $this->setPreferFormInputFilter(true);
+        $this->setAttribute('role', 'form');
+        $this->setAttribute('class', 'form-horizontal');
+
+        $this->add([
             'name' => 'title',
             'options' => [
                 'label' => 'Title'
@@ -32,7 +26,7 @@ class EventFormFactory implements FactoryInterface
             ]
         ]);
 
-        $form->add([
+        $this->add([
             'name' => 'location',
             'options' => [
                 'label' => 'Location'
@@ -42,7 +36,7 @@ class EventFormFactory implements FactoryInterface
             ]
         ]);
 
-        $form->add([
+        $this->add([
             'name' => 'description',
             'options' => [
                 'label' => 'Description'
@@ -52,7 +46,7 @@ class EventFormFactory implements FactoryInterface
             ]
         ]);
 
-        $form->add([
+        $this->add([
             'name' => 'maxattendees',
             'options' => [
                 'label' => 'Max. attendees'
@@ -62,7 +56,18 @@ class EventFormFactory implements FactoryInterface
             ]
         ]);
 
-        $form->add([
+        $this->add([
+            'name' => 'group_id',
+            'type' => 'select',
+            'options' => [
+                'label' => 'Group',
+            ],
+            'attributes' => [
+                'type' => 'select',
+            ],
+        ]);
+
+        $this->add([
             'name' => 'datetime',
             'options' => [
                 'label' => 'Date and time'
@@ -72,14 +77,8 @@ class EventFormFactory implements FactoryInterface
             ]
         ]);
 
-        $form->setHydrator(new ClassMethods());
-        $form->setInputFilter($this->getInputFilter());
+        $this->setHydrator(new ClassMethods());
 
-        return $form;
-    }
-
-    protected function getInputFilter()
-    {
         $inputFilter = new InputFilter();
         $inputFilter->add([
             'name' => 'title',
@@ -91,6 +90,21 @@ class EventFormFactory implements FactoryInterface
                 ['name' => 'StringTrim']
             ]
         ]);
-        return $inputFilter;
+        $this->setInputFilter($this->getInputFilter());
+
+        $this->getInputFilter()->get('group_id')->setRequired(false);
+    }
+
+    public function setGroups(array $groups, $addEmpty = true)
+    {
+        $options = [
+            'value_options' => $groups,
+        ];
+
+        if ($addEmpty === true) {
+            $options['empty_option'] = 'Please select the organizing group...';
+        }
+
+        $this->get('group_id')->setOptions($options);
     }
 }

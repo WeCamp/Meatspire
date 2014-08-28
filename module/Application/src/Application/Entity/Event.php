@@ -69,9 +69,26 @@ class Event
      */
     protected $rsvps;
 
+    /**
+     * @var Group
+     * @ORM\ManyToOne(targetEntity="Group")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id")
+     */
+    protected $group;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="User")
+     * @ORM\JoinTable(name="event_organizer",
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="user_id")}
+     *      )
+     */
+    protected $organizers;
+
     public function __construct()
     {
         $this->rsvps = new ArrayCollection();
+        $this->organizers = new ArrayCollection();
     }
 
     /**
@@ -238,5 +255,37 @@ class Event
     public function getRsvps()
     {
         return $this->rsvps;
+    }
+
+    /**
+     * @param Group $group
+     */
+    public function setGroup($group)
+    {
+        $this->group = $group;
+    }
+
+    /**
+     * @return Group
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param ArrayCollection $organizers
+     */
+    public function setOrganizers($organizers)
+    {
+        $this->organizers = $organizers;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getOrganizers()
+    {
+        return $this->organizers;
     }
 }

@@ -76,4 +76,12 @@ class EventService
         $rsvp = $entityRepository->findOneBy(['event' => $event->getId(), 'user' => $user->getId()]);
         return $rsvp;
     }
+    /**
+     * @param Event $event
+     */
+    public function saveEvent(Event $event)
+    {
+        $this->entityManager->persist($event);
+        $this->entityManager->flush($event);
+    }
 }

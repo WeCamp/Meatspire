@@ -42,14 +42,14 @@ class GroupController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $groupForm->setData($this->getRequest()->getPost());
             if ($groupForm->isValid()) {
-                /** @var \Application\Service\EventService $eventService */
-                $eventService = $this->serviceLocator->get('Application\Service\Event');
+                /** @var \Application\Service\GroupService $eventService */
+                $groupService = $this->serviceLocator->get('Application\Service\Group');
 
                 $identity = $this->zfcUserAuthentication()->getIdentity();
 
-                $eventService->addUserToGroup($identity, $groupEntity, GroupMember::ADMIN);
+                $groupService->addUserToGroup($identity, $groupEntity, GroupMember::ADMIN);
 
-                $eventService->saveGroup($groupEntity);
+                $groupService->saveGroup($groupEntity);
 
                 return $this->redirect()->toRoute('group');
             }

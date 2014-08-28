@@ -1,15 +1,18 @@
-<h1>List of events</h1>
+<div class="row">
+    <h1 class="col-lg-9">List of events</h1>
+    <div class="col-lg-3">
+        <a href="<?=$this->url('event/create')?>" class="btn btn-primary"><?=$this->translate('Create event')?></a>
+    </div>
+</div>
 
-<table class="table">
-    <tr>
-        <th>Title</th>
-        <th>Date</th>
-    </tr>
-    <?php /* @var \Application\Entity\Event $event */ ?>
-    <?php foreach ($this->events as $event) : ?>
-    <tr>
-        <td><?php echo $event->getTitle() ?></td>
-        <td><?php echo $event->getDatetime()->format('l F jS, Y') ?></td>
-    </tr>
-    <?php endforeach ?>
-</table>
+<div class="row">
+    <ul class="col-lg-9 list-group">
+        <?php /* @var \Application\Entity\Event $event */ ?>
+        <?php foreach ($events as $event) : ?>
+            <li class="list-group-item">
+                <h2><?php echo $this->escapeHtml($event->getTitle()) ?></h2>
+                <?php echo $event->getDatetime()->format('l F jS, Y') ?>
+            </li>
+        <?php endforeach ?>
+    </ul>
+</div>

@@ -10,7 +10,20 @@ class GroupController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        /** @var \Application\Service\Group $groups */
+        $groups = $this->getServiceLocator()->get('Application\Service\Group');
+
+        $filters = [];
+        $location = $this->params()->fromQuery('location');
+        if ($location) {
+            $filters['location'] = $location;
+        }
+
+        return new ViewModel([
+            'groups'    => $groups->getGroupsOverview($filters),
+            'locations' => $groups->getUniqueLocations(),
+            'filters' => $filters
+        ]);
     }
 
     public function createAction()

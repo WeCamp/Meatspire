@@ -1,1 +1,51 @@
-Group index page.
+<?php $this->headTitle()->prepend($this->translate('Find meetspire groups')); ?>
+<?php if (isset($filters['location'])): ?>
+    <h1>Meetspire groups near <?=$this->escapeHtml($filters['location'])?></h1>
+<?php else: ?>
+    <h1>View all meetspire groups</h1>
+<?php endif; ?>
+<div class="row">
+    <div class="col-lg-9">
+        <ul class="list-group">
+        <?php
+        /** @var $group \Application\Entity\Group */
+        foreach($groups as $group): ?>
+            <li class="list-group-item">
+                <h2><?=$this->escapeHtml($group->getName())?></h2>
+                <?php if ($group->getDescription()): ?>
+                    <p><?=$this->escapeHtml($group->getDescription())?></p>
+                <?php else: ?>
+                    <p>This meetspire group does not have a description yet</p>
+                <?php endif; ?>
+            </li>
+        <?php endforeach ?>
+        </ul>
+    </div>
+    <div class="col-lg-3">
+        <h3>Filters</h3>
+
+        <strong>Location</strong>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="<?=$this->url('group')?>">All locations</a>
+            </li>
+            <?php foreach ($locations as $location):
+                if (trim($location['location']) == '') {
+                    continue;
+                }
+                ?>
+                <li class="list-group-item">
+                    <a href="<?=$this->url('group')?>?<?=http_build_query(['location' => $location['location']])?>">
+                        <?php
+                        if (isset($filters['location']) && $filters['location'] == $location['location']) {
+                            printf('<strong>%s</strong>', $this->escapeHtml($location['location']));
+                        } else {
+                            echo $this->escapeHtml($location['location']);
+                        }
+                        ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>

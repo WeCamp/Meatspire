@@ -2,6 +2,7 @@
 
 namespace Application\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,10 +40,18 @@ class Group
     protected $location;
 
     /**
-     * @ORM\OneToMany(targetEntity="GroupMember", mappedBy="group")
-     * @var GroupMember
+     * @ORM\OneToMany(targetEntity="GroupMember", mappedBy="group", cascade={"persist"})
+     * @var ArrayCollection
      */
     protected $members;
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->members = new ArrayCollection();
+    }
 
     /**
      * @param string $description
@@ -109,15 +118,18 @@ class Group
     }
 
     /**
-     * @param GroupMember $members
+     * @param ArrayCollection|array $members
      */
     public function setMembers($members)
     {
+        if (is_array($members)) {
+            $members = new ArrayCollection($members);
+        }
         $this->members = $members;
     }
 
     /**
-     * @return GroupMember
+     * @return ArrayCollection
      */
     public function getMembers()
     {

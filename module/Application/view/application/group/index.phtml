@@ -1,8 +1,11 @@
 <?php $this->headTitle()->prepend($this->translate('Find meetspire groups')); ?>
-<h1>View all meetspire groups</h1>
+<?php if (isset($filters['location'])): ?>
+    <h1>Meetspire groups near <?=$this->escapeHtml($filters['location'])?></h1>
+<?php else: ?>
+    <h1>View all meetspire groups</h1>
+<?php endif; ?>
 <div class="row">
     <div class="col-lg-9">
-        Group count: <?=count($groups)?>
         <ul class="list-group">
         <?php
         /** @var $group \Application\Entity\Group */
@@ -19,13 +22,27 @@
         </ul>
     </div>
     <div class="col-lg-3">
-        <h3>Filter by</h3>
+        <h3>Filters</h3>
+
         <strong>Location</strong>
         <ul class="list-group">
-            <?php foreach ($locations as $location): ?>
+            <li class="list-group-item">
+                <a href="<?=$this->url('group')?>">All locations</a>
+            </li>
+            <?php foreach ($locations as $location):
+                if (trim($location['location']) == '') {
+                    continue;
+                }
+                ?>
                 <li class="list-group-item">
                     <a href="<?=$this->url('group')?>?<?=http_build_query(['location' => $location['location']])?>">
-                        <?=$this->escapeHtml($location['location'])?>
+                        <?php
+                        if (isset($filters['location']) && $filters['location'] == $location['location']) {
+                            printf('<strong>%s</strong>', $this->escapeHtml($location['location']));
+                        } else {
+                            echo $this->escapeHtml($location['location']);
+                        }
+                        ?>
                     </a>
                 </li>
             <?php endforeach; ?>

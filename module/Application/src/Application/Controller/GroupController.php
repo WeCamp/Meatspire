@@ -28,7 +28,8 @@ class GroupController extends AbstractActionController
 
         return new ViewModel([
             'groups'    => $groups->getGroupsOverview($filters),
-            'locations' => $groups->getUniqueLocations()
+            'locations' => $groups->getUniqueLocations(),
+            'filters' => $filters
         ]);
     }
 

@@ -1,15 +1,15 @@
 <div class="row">
     <div class="col-lg-12 homepage-header">
-        <p>Meet other people, learn things, be inspire</p>
+        <p>Meet other people, learn things, be inspired</p>
     </div>
 </div>
 
 <div class="row">
-    <h1 class="col-lg-9">Current events</h1>
+    <h1 class="col-lg-12">Current events</h1>
 </div>
 
 <div class="row">
-    <div class="col-lg-9">
+    <div class="col-lg-12">
         <?php foreach ($events as $event) : ?>
 
             <div class="list-group">
@@ -38,6 +38,20 @@
                         <?php echo $this->translate('Organised by:') ?><br /><br />
                         <?php echo $event->getDescription() ?>
                     </p>
+
+                    <?php if ($event->getRsvps()): ?>
+                        <ul class="user-list">
+                            <?php foreach ($event->getRsvps() as $rsvp):
+                                if ($rsvp->getRsvpType() != $rsvp::TYPE_COMING) {
+                                    continue;
+                                }
+                                ?>
+                                <li>
+                                    <img src="http://www.gravatar.com/avatar/<?=md5(strtolower($rsvp->getUser()->getEmail()))?>?s=32" />
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
                 </a>
             </div>
         <?php endforeach ?>

@@ -38,21 +38,13 @@
                 </p>
                 <?php if ($event->getRsvps()): ?>
                     <ul class="user-list">
-                    <?php foreach ($event->getRsvps() as $rsvp): ?>
+                    <?php foreach ($event->getRsvps() as $rsvp):
+                        if ($rsvp->getRsvpType() != $rsvp::TYPE_COMING) {
+                            continue;
+                        }
+                        ?>
                         <li>
-                            <img src="http://www.gravatar.com/avatar/<?=md5($rsvp->getUser()->getEmail())?>?s=32" />
-                        </li>
-                        <li>
-                            <img src="http://www.gravatar.com/avatar/<?=md5('rick93@gmail.com')?>?s=32" />
-                        </li>
-                        <li>
-                            <img src="http://www.gravatar.com/avatar/<?=md5('stefan@ingewikkeld.net')?>?s=32" />
-                        </li>
-                        <li>
-                            <img src="http://www.gravatar.com/avatar/<?=md5('jelrik@ingewikkeld.net')?>?s=32" />
-                        </li>
-                        <li>
-                            <img src="http://www.gravatar.com/avatar/<?=md5('mike@ingewikkeld.net')?>?s=32" />
+                            <img src="http://www.gravatar.com/avatar/<?=md5(strtolower($rsvp->getUser()->getEmail()))?>?s=32" />
                         </li>
                     <?php endforeach; ?>
                     </ul>

@@ -20,7 +20,7 @@
                 <?php /** @var \Application\Entity\GroupMember $groupMember */ ?>
                 <?php foreach ($group->getMembers() as $groupMember) : ?>
                 <li>
-                    <img src="http://www.gravatar.com/avatar/<?=md5($groupMember->getUser()->getEmail())?>?s=32" />
+                    <img src="http://www.gravatar.com/avatar/<?=md5(strtolower($groupMember->getUser()->getEmail()))?>?s=32" />
                 </li>
                 <?php endforeach ?>
             </ul>
